@@ -1,0 +1,22 @@
+.promo {
+  width: 100%;
+  padding: 20px 40px 0;
+}
+.promo__container {
+  min-height: 493px;
+  display: grid;
+  grid-template-rows: 1fr 66px;
+  background: var(--bg-promo);
+  border-radius: 10px;
+}
+.promo__title {
+  max-width: 730px;
+  text-align: center;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -2px;
+  margin: 0;
+  align-self: center;
+  justify-self: center;
+}

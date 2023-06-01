@@ -1,0 +1,56 @@
+.student {
+  padding: 110px 70px 125px;
+}
+.student__wrapper {
+  padding-top: 66px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.student__info {
+  max-width: 599px;
+  display: flex;
+  flex-direction: column;
+}
+.student__name {
+  margin: 0;
+  padding-bottom: 18px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+.student__job {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  padding-bottom: 26px;
+}
+.student__about {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+.student__link {
+  padding-top: 100px;
+  text-decoration: none;
+  color: var(--color-main);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+.student__photo {
+  display: block;
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+  justify-self: flex-end;
+}
+@media (pointer: fine) {
+  .student__link:hover {
+    opacity: .7;
+  }
+}
