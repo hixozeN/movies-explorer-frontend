@@ -1,9 +1,15 @@
-import React from 'react'
+import React from 'react';
+import './Login.css';
+import AuthForm from '../AuthForm/AuthForm';
 
-const Login = () => {
+const Login = ({ onLogin, onRegister }) => {
   return (
-    <div>Login</div>
-  )
-}
+    <div className='auth'>
+      <div className='auth__logo'></div>
+      <h2 className='auth__title'>Рады видеть!</h2>
+      <AuthForm isRegForm={false} onLogin={onLogin} onRegister={onRegister} />
+    </div>
+  );
+};
 
-export default Login
+export default Login;

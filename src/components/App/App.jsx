@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import Landing from '../Landing/Landing';
 import Main from '../Main/Main';
@@ -6,9 +6,20 @@ import NotFound from '../NotFound/NotFound';
 import Profile from '../Profile/Profile';
 import { useState } from 'react';
 import SavedMovies from '../SavedMovies/SavedMovies';
+import Login from '../Login/Login';
+import Register from '../Register/Register';
 
 const App = () => {
-  const [isLoggedIn, setLoggedIn] = useState(true);
+  const navigate = useNavigate();
+  const [isLoggedIn, setLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setLoggedIn(true);
+    navigate('/movies', { replace: true });
+  }
+  const handleRegister = () => {
+    navigate('/signin');
+  }
 
   return (
     <>
@@ -31,11 +42,11 @@ const App = () => {
         />
         <Route
           path='/signup'
-          element={<Main />}
+          element={<Register onLogin={handleLogin} onRegister={handleRegister} />}
         />
         <Route
           path='/signin'
-          element={<Main />}
+          element={<Login onLogin={handleLogin} onRegister={handleRegister} />}
         />
         <Route
           path='*'

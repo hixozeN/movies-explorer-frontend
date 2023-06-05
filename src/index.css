@@ -6,6 +6,8 @@
   --color-inverted-main: #fff;
   --color-additional: #a0a0a0;
   --color-border: #e8e8e8;
+  --color-error: #FF4062;
+  --color-button-disabled: #c2c2c2;
 
   --bg-color-main: #fff;
   --bg-inverted-color-main: #000;
@@ -13,6 +15,7 @@
   --bg-nav-link: #e8e8e8;
   --bg-duration: #f2f2f2;
   --bg-show-more-button: #F9F9F9;
+  --bg-button-disabled: #f8f8f8;
 
   --border-color-main: #000;
 }
