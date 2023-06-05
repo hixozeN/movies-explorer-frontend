@@ -1,1 +1,1 @@
-export const techs = [ 'HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'MongoDB', ];
+export const techs = [ 'HTML', 'CSS', 'JS', 'React', 'Git', 'Express.js', 'mongoDB', ];

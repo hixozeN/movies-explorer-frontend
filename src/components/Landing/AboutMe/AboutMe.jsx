@@ -1,7 +1,7 @@
 import React from 'react';
 import './AboutMe.css';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import photo from '../../images/student.png';
+import photo from '../../../images/student.png';
 import { Link } from 'react-router-dom';
 import Portfolio from '../Portfolio/Portfolio';
 

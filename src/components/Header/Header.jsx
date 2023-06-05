@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
 import './Header.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const Header = () => {
-  const [isLoggedIn, setLoggedIn] = useState(false);
+const Header = ({ isLoggedIn }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <header className='header'>
-      <div className='header__logo'></div>
-      {isLoggedIn && (
+      <div
+        className='header__logo'
+        onClick={() => navigate('/')}
+      ></div>
+      {(isLoggedIn || location.pathname === '/profile' || location.pathname === '/movies') && (
         <ul className='header__links'>
           <li>
             <Link
               className='header__link header__link_active'
-              to='/films'
+              to='/movies'
             >
               Фильмы
             </Link>
@@ -21,7 +24,7 @@ const Header = () => {
           <li>
             <Link
               className='header__link'
-              to='/films'
+              to='/saved-movies'
             >
               Сохранённые фильмы
             </Link>
@@ -29,10 +32,11 @@ const Header = () => {
         </ul>
       )}
       <div className='header__buttons-wrapper'>
-        {isLoggedIn ? (
+        {isLoggedIn || location.pathname === '/profile' || location.pathname === '/movies' ? (
           <button
             type='button'
             className='header__button header__button_type_profile'
+            onClick={() => navigate('/profile')}
           >
             Аккаунт
           </button>
@@ -41,12 +45,14 @@ const Header = () => {
             <button
               type='button'
               className='header__button'
+              onClick={() => navigate('/signup')}
             >
               Регистрация
             </button>
             <button
               type='button'
               className='header__button header__button_type_black'
+              onClick={() => navigate('/signin')}
             >
               Войти
             </button>

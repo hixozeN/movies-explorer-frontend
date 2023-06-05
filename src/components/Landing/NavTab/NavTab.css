@@ -10,8 +10,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 96px;
-  height: 36px;
+  min-width: 96px;
+  min-height: 36px;
   text-align: center;
   color: var(--color-inverted-main);
   background: #000;
@@ -21,6 +21,7 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all .3s ease-in-out;
+  padding: 0 10px;
 }
 
 @media (pointer: fine) {

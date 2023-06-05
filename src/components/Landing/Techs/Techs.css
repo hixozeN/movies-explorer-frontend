@@ -48,6 +48,5 @@
   line-height: 17px;
   text-align: center;
   letter-spacing: -0.04em;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  padding: 0 10px;
 }

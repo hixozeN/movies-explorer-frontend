@@ -1,6 +1,6 @@
 import React from 'react';
 import './Portfolio.css';
-import { portfolioData } from '../../data/portfolioData';
+import { portfolioData } from '../../../data/portfolioData';
 import { Link } from 'react-router-dom';
 
 const Portfolio = () => {
