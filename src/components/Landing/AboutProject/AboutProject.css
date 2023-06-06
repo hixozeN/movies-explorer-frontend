@@ -60,3 +60,26 @@
   line-height: 17px;
   color: var(--color-additional);
 }
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .about {
+    padding: 90px 50px 90px;
+  }
+  .about__info-element {
+    max-width: 319px;
+    gap: 22px;
+  }
+  .about__info-list {
+    gap: 30px;
+  }
+  .about__info-text {
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .about__duration {
+    padding-top: 93px;
+  }
+  .about__duration-heading {
+    font-weight: 500;
+  }
+}

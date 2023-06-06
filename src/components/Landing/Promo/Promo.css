@@ -20,3 +20,18 @@
   align-self: center;
   justify-self: center;
 }
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .promo {
+    padding: 20px 20px 0;
+  }
+  .promo__container {
+    min-height: 834px;
+  }
+  .promo__title {
+    padding-top: 40px;
+    max-width: 680px;
+    font-size: 40px;
+    line-height: 52px;
+  }
+}

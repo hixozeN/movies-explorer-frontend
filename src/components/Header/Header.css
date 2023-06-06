@@ -70,3 +70,8 @@
     opacity: .8;
   }
 }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .header {
+    padding: 18px 30px;
+  }
+}

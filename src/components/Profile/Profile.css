@@ -1,0 +1,22 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.profile__label {}
+.profile__input-title {}
+.profile__input {
+  width: 85%;
+  flex-grow: 1.5;
+}
+.profile__span-error {}
+.profile__response-error {}
+.profile__button {}
+.profile__button_disabled {}
+.profile__button_type_submit {}
+.profile__button_type_logout {}

@@ -62,7 +62,7 @@
 .form__submit-button_disabled {
   background-color: var(--bg-button-disabled);
   color: var(--color-button-disabled);
-  cursor: default;
+  cursor: not-allowed;
 }
 .form__link-caption {
   margin: 0;

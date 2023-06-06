@@ -1,48 +1,46 @@
 import React from 'react';
+import './Profile.css';
 import Header from '../Header/Header';
-import { Link } from 'react-router-dom';
+import useFormAndValidation from '../../hooks/FormValidation/useFormValidation';
 
 const Profile = () => {
+  const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation();
+
   return (
     <>
       <Header />
-      <div className='auth'>
-        <h2 className='auth__title'>Вход</h2>
+      <div className='profile'>
+        <h2 className='profile__title'>Привет, Виталий!</h2>
         <form
-          name='register'
-          className='auth__form'
+          name='profile'
+          className='profile__form'
         >
-          <input
-            type='email'
-            name='email'
-            minLength={6}
-            placeholder='Email'
-            className='auth__input'
-            value={''}
-            autoComplete='email'
-            required
-          />
-          <input
-            type='password'
-            name='password'
-            placeholder='Пароль'
-            className='auth__input'
-            value={''}
-            autoComplete='current-password'
-            required
-          />
+          <label className='profile__label'>
+            <span className='profile__input-title'>Имя</span>
+            <input
+              className='profile__input'
+              type='text'
+              name='name'
+              onChange={handleChange}
+              value={values.name ?? ''}
+              required
+            />
+            <span className='profile__span-error'>test</span>
+          </label>
+          <p className='profile__response-error'>{!isValid && 'Пример текста ошибки с сервера.'}</p>
           <button
             type='submit'
-            className='auth__submit-button'
+            className={`profile__button profile__button_type_submit ${!isValid && 'profile__button_disabled'}`}
+            disabled={!isValid}
           >
-            Тест
+            Редактировать
           </button>
-          <Link
-            to='/sign-up'
-            className='auth__link'
+          <button
+            type='button'
+            className='profile__button profile__button_type_logout'
           >
-            Нет аккаунта? Зарегистрируйтесь
-          </Link>
+            Выйти из аккаунта
+          </button>
         </form>
       </div>
     </>

@@ -50,3 +50,26 @@
   letter-spacing: -0.04em;
   padding: 0 10px;
 }
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .techs {
+    padding: 90px 50px;
+  }
+  .techs__article-title {
+    padding: 80px 0 22px;
+  }
+  .techs__article-caption {
+    font-size: 12px;
+    line-height: 18px;
+    padding-bottom: 83px;
+  }
+  .techs__tech-list {
+    grid-template-columns: repeat(auto-fit, minmax(min(84px), 1fr));
+  }
+  .techs__tech-element {
+    min-width: 84px;
+    min-height: 57px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

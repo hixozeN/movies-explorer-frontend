@@ -15,7 +15,7 @@ const AuthForm = ({ isRegForm, onLogin, onRegister }) => {
 
   return (
     <form
-      name='register'
+      name={isRegForm ? 'register' : 'login'}
       className='form'
       onSubmit={handleSubmit}
     >

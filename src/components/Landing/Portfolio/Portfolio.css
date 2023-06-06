@@ -43,3 +43,11 @@
     opacity: 0.7;
   }
 }
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .portfolio {
+    padding: 90px 0 0;
+  }
+  .portfolio__item {
+    font-size: 28px;
+  }
+}
