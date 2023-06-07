@@ -1,14 +1,14 @@
 export const portfolioData = [
   {
     title: 'Статичный сайт',
-    url: '#',
+    url: 'https://hixozen.github.io/how-to-learn/',
   },
   {
     title: 'Адаптивный сайт',
-    url: '#',
+    url: 'https://hixozen.github.io/russian-travel/',
   },
   {
     title: 'Одностраничное приложение',
-    url: '#',
+    url: 'https://mesto.hixozen.ru',
   },
 ];

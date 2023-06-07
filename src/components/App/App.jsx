@@ -16,44 +16,56 @@ const App = () => {
   const handleLogin = () => {
     setLoggedIn(true);
     navigate('/movies', { replace: true });
-  }
+  };
   const handleRegister = () => {
     navigate('/signin');
-  }
+  };
+  const handleLogout = () => {
+    setLoggedIn(false);
+    navigate('/', { replace: true });
+  };
 
   return (
-    <>
-      <Routes>
+    <Routes>
       <Route
-          path='/'
-          element={<Landing isLoggedIn={isLoggedIn} />}
-        />
-        <Route
-          path='/movies'
-          element={<Main isLoggedIn={isLoggedIn} />}
-        />
-        <Route
-          path='/saved-movies'
-          element={<SavedMovies isLoggedIn={isLoggedIn} />}
-        />
-        <Route
-          path='/profile'
-          element={<Profile />}
-        />
-        <Route
-          path='/signup'
-          element={<Register onLogin={handleLogin} onRegister={handleRegister} />}
-        />
-        <Route
-          path='/signin'
-          element={<Login onLogin={handleLogin} onRegister={handleRegister} />}
-        />
-        <Route
-          path='*'
-          element={<NotFound />}
-        />
-      </Routes>
-    </>
+        path='/'
+        element={<Landing isLoggedIn={isLoggedIn} />}
+      />
+      <Route
+        path='/movies'
+        element={<Main isLoggedIn={isLoggedIn} />}
+      />
+      <Route
+        path='/saved-movies'
+        element={<SavedMovies isLoggedIn={isLoggedIn} />}
+      />
+      <Route
+        path='/profile'
+        element={<Profile onLogout={handleLogout} />}
+      />
+      <Route
+        path='/signup'
+        element={
+          <Register
+            onLogin={handleLogin}
+            onRegister={handleRegister}
+          />
+        }
+      />
+      <Route
+        path='/signin'
+        element={
+          <Login
+            onLogin={handleLogin}
+            onRegister={handleRegister}
+          />
+        }
+      />
+      <Route
+        path='*'
+        element={<NotFound />}
+      />
+    </Routes>
   );
 };
 

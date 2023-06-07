@@ -1,9 +1,9 @@
 import './Header.css';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import HeaderLinks from './HeaderLinks/HeaderLinks';
 
 const Header = ({ isLoggedIn }) => {
   const navigate = useNavigate();
-  const location = useLocation();
 
   return (
     <header className='header'>
@@ -11,28 +11,9 @@ const Header = ({ isLoggedIn }) => {
         className='header__logo'
         onClick={() => navigate('/')}
       ></div>
-      {(isLoggedIn || location.pathname === '/profile' || location.pathname === '/movies') && (
-        <ul className='header__links'>
-          <li>
-            <Link
-              className='header__link header__link_active'
-              to='/movies'
-            >
-              Фильмы
-            </Link>
-          </li>
-          <li>
-            <Link
-              className='header__link'
-              to='/saved-movies'
-            >
-              Сохранённые фильмы
-            </Link>
-          </li>
-        </ul>
-      )}
+      {isLoggedIn && <HeaderLinks />}
       <div className='header__buttons-wrapper'>
-        {isLoggedIn || location.pathname === '/profile' || location.pathname === '/movies' ? (
+        {isLoggedIn ? (
           <button
             type='button'
             className='header__button header__button_type_profile'

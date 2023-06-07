@@ -1,0 +1,22 @@
+.header__links {
+  display: flex;
+  list-style: none;
+  gap: 16px;
+  margin: 0;
+  padding-left: 43px;
+}
+.header__link {
+  text-decoration: none;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  color: var(--color-main);
+}
+.header__link_active {
+  font-weight: 500;
+}
+@media (pointer: fine) {
+  .header__link:hover {
+    opacity: .7;
+  }
+}

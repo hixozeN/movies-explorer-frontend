@@ -19,6 +19,13 @@
   font-size: 14px;
   line-height: 17px;
 }
+.label__input:focus {
+  border-bottom: 1px solid var(--color-main);
+}
+.label__input:-webkit-autofill {
+  -webkit-box-shadow: inset 0 0 0 50px var(--color-inverted-main);
+  -webkit-text-fill-color: var(--color-main);
+}
 .label__input_type_error {
   color: var(--color-error);
 }

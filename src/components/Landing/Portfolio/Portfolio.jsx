@@ -17,6 +17,8 @@ const Portfolio = () => {
               <Link
                 className='portfolio__link'
                 to={item.url}
+                target='_blank'
+                rel='noopener noreferrer'
               >
                 {item.title}
                 <span className='portfolio__icon'>↗</span>
