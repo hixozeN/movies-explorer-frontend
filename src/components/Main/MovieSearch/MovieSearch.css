@@ -13,7 +13,7 @@
   line-height: 34px;
   color: var(--color-main);
   background: url('../../../images/find.svg') no-repeat right 0px;
-  z-index: 3;
+  /* z-index: 3; */
 }
 
 .search__input:focus {

@@ -6,10 +6,10 @@ import AboutMe from './AboutMe/AboutMe'
 import Header from '../Header/Header'
 import Footer from '../Footer/Footer'
 
-const Landing = ({ isLoggedIn }) => {
+const Landing = () => {
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
+      <Header />
       <Promo />
       <AboutProject />
       <Techs />

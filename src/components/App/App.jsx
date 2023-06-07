@@ -8,64 +8,67 @@ import { useState } from 'react';
 import SavedMovies from '../SavedMovies/SavedMovies';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext/CurrentUserContext';
 
 const App = () => {
   const navigate = useNavigate();
-  const [isLoggedIn, setLoggedIn] = useState(false);
+  const [currentUser, setCurrentUser] = useState({});
 
   const handleLogin = () => {
-    setLoggedIn(true);
+    setCurrentUser((prev) => ({ ...prev, isLoggedIn: true }))
     navigate('/movies', { replace: true });
   };
   const handleRegister = () => {
     navigate('/signin');
   };
   const handleLogout = () => {
-    setLoggedIn(false);
+    setCurrentUser((prev) => ({ ...prev, isLoggedIn: false }))
     navigate('/', { replace: true });
   };
 
   return (
-    <Routes>
-      <Route
-        path='/'
-        element={<Landing isLoggedIn={isLoggedIn} />}
-      />
-      <Route
-        path='/movies'
-        element={<Main isLoggedIn={isLoggedIn} />}
-      />
-      <Route
-        path='/saved-movies'
-        element={<SavedMovies isLoggedIn={isLoggedIn} />}
-      />
-      <Route
-        path='/profile'
-        element={<Profile onLogout={handleLogout} />}
-      />
-      <Route
-        path='/signup'
-        element={
-          <Register
-            onLogin={handleLogin}
-            onRegister={handleRegister}
-          />
-        }
-      />
-      <Route
-        path='/signin'
-        element={
-          <Login
-            onLogin={handleLogin}
-            onRegister={handleRegister}
-          />
-        }
-      />
-      <Route
-        path='*'
-        element={<NotFound />}
-      />
-    </Routes>
+    <CurrentUserContext.Provider value={currentUser}>
+      <Routes>
+        <Route
+          path='/'
+          element={<Landing />}
+        />
+        <Route
+          path='/movies'
+          element={<Main />}
+        />
+        <Route
+          path='/saved-movies'
+          element={<SavedMovies />}
+        />
+        <Route
+          path='/profile'
+          element={<Profile onLogout={handleLogout} />}
+        />
+        <Route
+          path='/signup'
+          element={
+            <Register
+              onLogin={handleLogin}
+              onRegister={handleRegister}
+            />
+          }
+        />
+        <Route
+          path='/signin'
+          element={
+            <Login
+              onLogin={handleLogin}
+              onRegister={handleRegister}
+            />
+          }
+        />
+        <Route
+          path='*'
+          element={<NotFound />}
+        />
+      </Routes>
+    </CurrentUserContext.Provider>
   );
 };
 

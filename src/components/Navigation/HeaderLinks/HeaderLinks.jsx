@@ -5,7 +5,7 @@ import './HeaderLinks.css';
 
 const HeaderLinks = () => {
   return (
-    <ul className='header__links'>
+    <nav className='header__links'>
         {headerLinks.map((item) => {
           return (
             <li key={item.link}>
@@ -18,7 +18,7 @@ const HeaderLinks = () => {
             </li>
           );
         })}
-    </ul>
+    </nav>
   );
 };
 

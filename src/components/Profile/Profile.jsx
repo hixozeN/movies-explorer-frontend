@@ -24,7 +24,7 @@ const Profile = ({ onLogout }) => {
   return (
     <>
       <Header />
-      <div className='profile'>
+      <section className='profile'>
         <h2 className='profile__title'>Привет, {currentUser.name}!</h2>
         <form
           name='profile'
@@ -89,7 +89,7 @@ const Profile = ({ onLogout }) => {
             </>
           )}
         </form>
-      </div>
+      </section>
     </>
   );
 };

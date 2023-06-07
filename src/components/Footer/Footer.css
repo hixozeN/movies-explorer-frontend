@@ -29,8 +29,6 @@
   display: flex;
   gap: 20px;
 }
-.footer__links-element {
-}
 .footer__link {
   text-decoration: none;
   color: var(--color-main);

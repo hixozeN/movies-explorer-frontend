@@ -1,8 +1,8 @@
 import './Header.css';
 import { useNavigate } from 'react-router-dom';
-import HeaderLinks from './HeaderLinks/HeaderLinks';
+import Navigation from '../Navigation/Navigation';
 
-const Header = ({ isLoggedIn }) => {
+const Header = () => {
   const navigate = useNavigate();
 
   return (
@@ -11,35 +11,7 @@ const Header = ({ isLoggedIn }) => {
         className='header__logo'
         onClick={() => navigate('/')}
       ></div>
-      {isLoggedIn && <HeaderLinks />}
-      <div className='header__buttons-wrapper'>
-        {isLoggedIn ? (
-          <button
-            type='button'
-            className='header__button header__button_type_profile'
-            onClick={() => navigate('/profile')}
-          >
-            Аккаунт
-          </button>
-        ) : (
-          <>
-            <button
-              type='button'
-              className='header__button'
-              onClick={() => navigate('/signup')}
-            >
-              Регистрация
-            </button>
-            <button
-              type='button'
-              className='header__button header__button_type_black'
-              onClick={() => navigate('/signin')}
-            >
-              Войти
-            </button>
-          </>
-        )}
-      </div>
+      <Navigation />
     </header>
   );
 };

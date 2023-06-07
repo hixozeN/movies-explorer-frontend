@@ -1,0 +1,44 @@
+.header__buttons-wrapper {
+  margin-left: auto;
+  display: flex;
+  gap: 30px;
+}
+.header__button {
+  border: none;
+  background: transparent;
+  text-align: center;
+  height: 32px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  cursor: pointer;
+  transition: all .3s ease-in-out;
+}
+.header__button_type_black {
+  padding: 8px 20px;
+  color: var(--color-inverted-main);
+  background: var(--bg-inverted-color-main);
+  border-radius: 3px;
+}
+.header__button_type_profile {
+  padding: 9.5px 36px 9.5px 11px;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 12px;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 40px;
+  background: url(../../images/profile-icon.svg) no-repeat;
+  background-position: 70px;
+}
+@media (pointer: fine) {
+  .header__button:hover {
+    opacity: .8;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .header__buttons-wrapper {
+    margin: auto auto 0 auto;
+    padding-bottom: 90px;
+  }
+}

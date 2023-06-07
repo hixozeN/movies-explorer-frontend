@@ -4,10 +4,10 @@ import Footer from '../Footer/Footer'
 import MovieList from './MovieList/MovieList'
 import MovieSearch from './MovieSearch/MovieSearch'
 
-const Main = ({ isLoggedIn }) => {
+const Main = () => {
   return (
     <>
-      <Header isLoggedIn={isLoggedIn} />
+      <Header />
       <MovieSearch />
       <MovieList />
       <Footer />
