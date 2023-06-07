@@ -3,6 +3,15 @@
   display: flex;
   gap: 30px;
 }
+.header__burger-btn {
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  margin-left: auto;
+  border: none;
+  background: url(../../images/burger.svg);
+}
 .header__button {
   border: none;
   background: transparent;
@@ -34,9 +43,12 @@
   .header__button:hover {
     opacity: .8;
   }
+  .header__burger-btn:hover {
+    opacity: .8;
+  }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 820px) {
   .header__buttons-wrapper {
     margin: auto auto 0 auto;
     padding-bottom: 90px;

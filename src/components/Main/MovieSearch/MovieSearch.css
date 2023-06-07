@@ -96,3 +96,27 @@
   left: calc(var(--width) - var(--height) + var(--offset));
   transition: var(--duration);
 }
+@media screen and (max-width: 768px) {
+  .search {
+    padding: 73px 30px 60px;
+  }
+  .search__label {
+    flex-direction: row-reverse;
+    justify-content: flex-start;
+    padding-top: 28px;
+  }
+  .search__checkbox-caption {
+    gap: 16px;
+  }
+}
+@media screen and (max-width: 620px) {
+  .search__label {
+    justify-content: center;
+    padding-top: 40px;
+    gap: 13px;
+  }
+  .search__checkbox-caption {
+    font-size: 11px;
+
+  }
+}

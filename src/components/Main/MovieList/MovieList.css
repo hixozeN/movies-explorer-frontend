@@ -29,3 +29,13 @@
 .movies__show-more-button_type_inactive {
   visibility: hidden;
 }
+@media screen and (max-width: 768px) {
+  .movies {
+    padding: 70px 30px 0;
+  }
+  .movies__list {
+    padding: 0 0 30px;
+    grid-template-columns: repeat(2, minmax(1%, 1fr));
+    gap: 36px 30px;
+  }
+}

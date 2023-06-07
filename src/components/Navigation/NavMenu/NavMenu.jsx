@@ -1,14 +1,14 @@
-import React from 'react'
-import HeaderLinks from '../HeaderLinks/HeaderLinks'
-import NavButtons from '../NavButtons/NavButtons'
+import React from 'react';
+import HeaderLinks from '../HeaderLinks/HeaderLinks';
+import NavButtons from '../NavButtons/NavButtons';
 
-const NavMenu = () => {
+const NavMenu = ({ isDesktop }) => {
   return (
     <>
-      <HeaderLinks />
+      <HeaderLinks isDesktop={isDesktop} />
       <NavButtons />
     </>
-  )
-}
+  );
+};
 
-export default NavMenu
+export default NavMenu;

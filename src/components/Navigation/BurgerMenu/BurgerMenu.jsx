@@ -1,17 +1,25 @@
 import NavMenu from '../NavMenu/NavMenu';
 import './BurgerMenu.css';
 
-const BurgerMenu = () => {
+const BurgerMenu = ({ active, onCloseMenu }) => {
   return (
-    <div className='menu'>
-      <div className="menu__blur">
-        <div className="menu__content">
-          <button type='button' aria-label='Закрыть меню' className='menu__close-button' />
+    <div className={active ? 'menu menu_active' : 'menu'}>
+      <div
+        className='menu__blur'
+        onClick={onCloseMenu}
+      >
+        <div className='menu__content' onClick={(e) => e.stopPropagation()}>
+          <button
+            type='button'
+            aria-label='Закрыть меню'
+            className='menu__close-button'
+            onClick={onCloseMenu}
+          />
           <NavMenu />
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default BurgerMenu
+export default BurgerMenu;

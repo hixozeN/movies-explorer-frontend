@@ -4,12 +4,21 @@
   height: 100vh;
   top: 0;
   left: 0;
+  z-index: 99;
+  visibility: hidden;
+  transform: translateX(-100%);
+  transition: all 0.2s ease-in-out;
+}
+
+.menu_active {
+  visibility: visible;
+  transform: translateX(0);
 }
 
 .menu__blur {
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0);
+  background: rgba(0, 0, 0, 0.3);
   position: absolute;
 }
 .menu__content {
@@ -32,4 +41,9 @@
   background: url(../../../images/close-button.svg) no-repeat center;
   background-size: 22px 22px;
   border: none;
+}
+@media screen and (max-width: 620px) {
+  .menu__content {
+    width: 100%;
+  }
 }

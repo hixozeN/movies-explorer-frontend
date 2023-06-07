@@ -20,11 +20,11 @@
     opacity: 0.7;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 820px) {
   .header__links {
     flex-direction: column;
     align-items: center;
-    padding-top: 159px;
+    padding: 159px 0 0;
     margin: 0 auto;
     gap: 28px;
   }
@@ -32,5 +32,9 @@
     font-weight: 500;
     font-size: 18px;
     line-height: 22px;
+  }
+  .header__link_active {
+    padding-bottom: 7px;
+    border-bottom: 2px solid black;
   }
 }
