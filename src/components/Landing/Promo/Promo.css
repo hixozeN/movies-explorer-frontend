@@ -35,7 +35,7 @@
     line-height: 52px;
   }
 }
-@media screen and (max-width: 767.99px) {
+@media screen and (max-width: 767px) {
   .promo {
     padding: 14px 14px 0;
   }

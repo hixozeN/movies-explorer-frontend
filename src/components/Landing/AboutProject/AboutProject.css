@@ -83,7 +83,7 @@
     font-weight: 500;
   }
 }
-@media screen and (max-width: 767.99px) {
+@media screen and (max-width: 767px) {
   .about {
     padding: 70px 18px 70px;
   }

@@ -30,7 +30,7 @@
   }
 }
 
-@media screen and (max-width: 767.99px) {
+@media screen and (max-width: 767px) {
   .nav-tab__link {
     min-width: 82px;
     min-height: 26px;
