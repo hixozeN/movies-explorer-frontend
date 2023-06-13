@@ -12,10 +12,12 @@
   grid-template-columns: repeat(3, minmax(1%, 1fr));
   gap: 30px 24px;
 }
+.movies__paggination-wrapper {
+  margin: 50px auto 92px;
+}
 .movies__show-more-button {
   cursor: pointer;
   padding: 0;
-  margin: 50px auto 92px;
   width: 320px;
   height: 36px;
   border: none;
@@ -29,7 +31,7 @@
 .movies__show-more-button_type_inactive {
   visibility: hidden;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 820px) {
   .movies {
     padding: 70px 30px 0;
   }

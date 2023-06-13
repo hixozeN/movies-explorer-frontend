@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 const Movie = (props) => {
   const { name, duration, saved, link } = props;
   const location = useLocation();
+
   return (
     <li className='movie'>
       <div className='movie__heading-wrapper'>

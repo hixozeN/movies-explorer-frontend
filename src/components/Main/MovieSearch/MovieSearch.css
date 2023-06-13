@@ -96,7 +96,7 @@
   left: calc(var(--width) - var(--height) + var(--offset));
   transition: var(--duration);
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 820px) {
   .search {
     padding: 73px 30px 60px;
   }

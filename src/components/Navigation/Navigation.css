@@ -3,6 +3,7 @@
   display: flex;
   gap: 30px;
 }
+
 .header__burger-btn {
   cursor: pointer;
   width: 44px;
@@ -12,7 +13,7 @@
   border: none;
   background: url(../../images/burger.svg);
 }
-.header__button {
+/* .header__button {
   border: none;
   background: transparent;
   text-align: center;
@@ -38,19 +39,19 @@
   border-radius: 40px;
   background: url(../../images/profile-icon.svg) no-repeat;
   background-position: 70px;
-}
+} */
 @media (pointer: fine) {
-  .header__button:hover {
+  /* .header__button:hover {
     opacity: .8;
-  }
+  } */
   .header__burger-btn:hover {
     opacity: .8;
   }
 }
 
-@media screen and (max-width: 820px) {
+/* @media screen and (max-width: 820px) {
   .header__buttons-wrapper {
     margin: auto auto 0 auto;
     padding-bottom: 90px;
   }
-}
+} */

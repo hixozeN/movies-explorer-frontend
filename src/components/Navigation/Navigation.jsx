@@ -3,15 +3,18 @@ import './Navigation.css';
 import NavMenu from './NavMenu/NavMenu';
 import BurgerMenu from './BurgerMenu/BurgerMenu';
 import { DeviceContext } from '../../contexts/DeviceContext/DeviceContext';
+import { useLocation } from 'react-router-dom';
+import NavPromo from './NavPromo/NavPromo';
 
 const Navigation = () => {
+  const location = useLocation();
   const [menuActive, setMenuActive] = useState(false);
   const device = useContext(DeviceContext);
   const [isDesktop, setDesktop] = useState(true);
 
   const handleMenu = () => {
     setMenuActive(!menuActive);
-  }
+  };
 
   useEffect(() => {
     if (device === 'desktop') {
@@ -24,16 +27,25 @@ const Navigation = () => {
 
   return (
     <>
-      {isDesktop ? (
-        <NavMenu isDesktop={isDesktop} />
+      {location.pathname === '/' ? (
+        <NavPromo />
       ) : (
-        <button
-          type='button'
-          className='header__burger-btn'
-          onClick={handleMenu}
-        ></button>
+        <>
+          {isDesktop ? (
+            <NavMenu isDesktop={isDesktop} />
+          ) : (
+            <button
+              type='button'
+              className='header__burger-btn'
+              onClick={handleMenu}
+            />
+          )}
+          <BurgerMenu
+            active={menuActive}
+            onCloseMenu={handleMenu}
+          />
+        </>
       )}
-      <BurgerMenu active={menuActive} onCloseMenu={handleMenu} />
     </>
   );
 };
