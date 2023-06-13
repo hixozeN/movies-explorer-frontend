@@ -58,3 +58,9 @@
     opacity: 0.7;
   }
 }
+
+@media screen and (max-width: 820px) {
+  .form__response-error {
+    margin: 88px 0 20px;
+  }
+}

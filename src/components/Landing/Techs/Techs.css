@@ -73,3 +73,24 @@
     line-height: 15px;
   }
 }
+@media screen and (max-width: 767.99px) {
+  .techs {
+    padding: 70px 18px;
+  }
+  .techs__article-title {
+    padding: 60px 0 24px;
+    font-size: 30px;
+    line-height: 36px;
+  }
+  .techs__article-caption {
+    font-size: 11px;
+    line-height: 16px;
+    padding-bottom: 49px;
+  }
+  .techs__tech-element {
+    min-width: 84px;
+    min-height: 57px;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

@@ -33,3 +33,15 @@
     opacity: .8;
   }
 }
+
+@media screen and (max-width: 767.99px) {
+  .promo__link {
+    font-size: 10px;
+  }
+  .promo__nav-list-promo {
+    gap: 14px;
+  }
+  .promo__link_type_login {
+    padding: 5px 12px;
+  }
+}

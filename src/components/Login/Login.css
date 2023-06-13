@@ -5,6 +5,7 @@
   justify-content: center;
   margin: 0 auto;
   padding-top: 70px;
+  padding-bottom: 70px;
 }
 .auth__logo {
   cursor: pointer;
@@ -23,5 +24,12 @@
 @media (pointer: fine) {
   .auth__logo:hover {
     opacity: 0.7;
+  }
+}
+
+@media screen and (max-width: 820px) {
+  .auth {
+    min-height: 100vh;
+    padding-top: 0px;
   }
 }

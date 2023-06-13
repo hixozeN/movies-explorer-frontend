@@ -16,8 +16,13 @@
     opacity: .8;
   }
 }
-@media screen and (min-width: 520px) and (max-width: 820px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
   .header {
     padding: 18px 30px;
+  }
+}
+@media screen and (max-width: 767.99px) {
+  .header {
+    padding: 18px 14px;
   }
 }

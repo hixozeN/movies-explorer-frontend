@@ -40,4 +40,7 @@
     grid-template-columns: repeat(2, minmax(1%, 1fr));
     gap: 36px 30px;
   }
+  .movies__paggination-wrapper {
+    margin: 50px auto 66px;
+  }
 }

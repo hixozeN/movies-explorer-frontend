@@ -8,3 +8,10 @@
   letter-spacing: -0.04em;
   border-bottom: 1px solid var(--border-color-main);
 }
+@media screen and (max-width: 767.99px) {
+  .section-title {
+    font-size: 18px;
+    line-height: 22px;
+    padding-bottom: 28px;
+  }
+}

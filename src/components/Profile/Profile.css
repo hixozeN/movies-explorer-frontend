@@ -107,3 +107,14 @@
     opacity: 0.8;
   }
 }
+@media screen and (max-width: 820px) {
+  .profile {
+    padding: 230px 0 70px;
+  }
+  .profile__title {
+    padding-bottom: 96px;
+  }
+  .profile__response-error {
+    margin: 160px 0 20px;
+  }
+}

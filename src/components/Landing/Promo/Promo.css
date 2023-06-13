@@ -35,3 +35,17 @@
     line-height: 52px;
   }
 }
+@media screen and (max-width: 767.99px) {
+  .promo {
+    padding: 14px 14px 0;
+  }
+  .promo__container {
+    min-height: 586px;
+  }
+  .promo__title {
+    padding-top: 30px;
+    max-width: 292px;
+    font-size: 29px;
+    line-height: 37px;
+  }
+}

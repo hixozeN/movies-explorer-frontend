@@ -46,3 +46,32 @@
     padding: 66px 30px 20px;
   }
 }
+@media screen and (max-width: 767.99px) {
+  .footer {
+    padding: 77px 10px 20px;
+  }
+  .footer__title {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .footer__copyright-wrapper {
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+  .footer__links {
+    padding-top: 8px;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+  .footer__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+  .footer__copyright {
+    color: var(--color-additional);
+    text-align: center;
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
