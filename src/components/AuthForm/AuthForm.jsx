@@ -6,7 +6,7 @@ import Label from './Label/Label';
 
 const AuthForm = ({ isRegForm, onLogin, onRegister }) => {
   const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation();
-  const [ serverResError, setServerResError ] = useState(false);
+  const [serverResError, setServerResError] = useState(false);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -46,7 +46,9 @@ const AuthForm = ({ isRegForm, onLogin, onRegister }) => {
         errors={errors}
         minLength={6}
       />
-      <p className="form__response-error">{serverResError && 'Пример текста ошибки с сервера.'}</p>
+      <p className={`form__response-error ${!isRegForm && 'form__response-error_type_login'}`}>
+        {serverResError && 'Пример текста ошибки с сервера.'}
+      </p>
       <button
         type='submit'
         className={`form__submit-button ${!isValid && 'form__submit-button_disabled'}`}

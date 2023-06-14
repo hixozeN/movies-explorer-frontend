@@ -1,5 +1,5 @@
 .not-found {
-  min-height: 700px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -36,5 +36,15 @@
 @media (pointer: fine) {
   .not-found__button:hover {
     opacity: 0.8;
+  }
+}
+@media screen and (max-width: 767px) {
+  .not-found__title {
+    font-size: 80px;
+    line-height: 97px;
+  }
+  .not-found__caption {
+    font-size: 12px;
+    line-height: 15px;
   }
 }

@@ -118,3 +118,20 @@
     margin: 160px 0 20px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .profile {
+    max-width: 260px;
+    padding: 65px 0 30px;
+  }
+  .profile__title {
+    padding-bottom: 80px;
+  }
+  .profile__response-error {
+    margin: 327px 0 20px;
+  }
+  .profile__button {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

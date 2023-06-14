@@ -51,7 +51,7 @@
   --height: 20px;
   --offset: 2px;
 
-  --duration: .3s;
+  --duration: 0.3s;
 }
 
 .search__checkbox-span {
@@ -110,6 +110,9 @@
   }
 }
 @media screen and (max-width: 620px) {
+  .search {
+    padding: 80px 14px 51px;
+  }
   .search__label {
     justify-content: center;
     padding-top: 40px;
@@ -117,6 +120,10 @@
   }
   .search__checkbox-caption {
     font-size: 11px;
-
+  }
+  .search__input {
+    font-size: 18px;
+    line-height: 22px;
+    min-height: 43px;
   }
 }

@@ -34,7 +34,7 @@
   }
 }
 
-@media screen and (max-width: 767.99px) {
+@media screen and (max-width: 767px) {
   .promo__link {
     font-size: 10px;
   }

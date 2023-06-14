@@ -62,3 +62,9 @@
     margin: auto 0 90px;
   }
 }
+@media screen and (max-width: 767px) {
+  .header__links-list {
+    padding: 145px 0 0;
+    gap: 24px;
+  }
+}

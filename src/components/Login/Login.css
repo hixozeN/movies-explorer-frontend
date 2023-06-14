@@ -29,7 +29,21 @@
 
 @media screen and (max-width: 820px) {
   .auth {
-    min-height: 100vh;
-    padding-top: 0px;
+    min-height: 1020px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .auth {
+    max-width: 260px;
+    padding: 56px 0 30px;
+    min-height: 706px;
+  }
+  .auth__logo {
+    align-self: center;
+  }
+  .auth__title {
+    text-align: center;
+    padding: 50px 0 80px;
   }
 }
