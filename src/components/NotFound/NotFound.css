@@ -1,0 +1,50 @@
+.not-found {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.not-found__title {
+  margin: 0;
+  padding-top: 246px;
+  font-weight: 400;
+  font-size: 140px;
+  line-height: 169px;
+  text-align: center;
+}
+.not-found__caption {
+  padding-top: 5px;
+  margin: 0;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  text-align: center;
+}
+.not-found__button {
+  max-width: 100px;
+  margin: auto auto 53px;
+  border: none;
+  background: transparent;
+  text-align: center;
+  height: 32px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+@media (pointer: fine) {
+  .not-found__button:hover {
+    opacity: 0.8;
+  }
+}
+@media screen and (max-width: 767px) {
+  .not-found__title {
+    font-size: 80px;
+    line-height: 97px;
+  }
+  .not-found__caption {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

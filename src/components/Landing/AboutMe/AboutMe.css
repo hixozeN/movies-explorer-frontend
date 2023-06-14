@@ -1,0 +1,116 @@
+.student {
+  padding: 110px 70px 125px;
+}
+.student__wrapper {
+  padding-top: 66px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.student__info {
+  max-width: 599px;
+  display: flex;
+  flex-direction: column;
+}
+.student__name {
+  margin: 0;
+  padding-bottom: 18px;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 58px;
+  letter-spacing: -0.04em;
+}
+.student__job {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  padding-bottom: 26px;
+}
+.student__about {
+  margin: 0;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 22px;
+}
+.student__link {
+  padding-top: 100px;
+  text-decoration: none;
+  color: var(--color-main);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+}
+.student__photo {
+  display: block;
+  width: 270px;
+  height: 327px;
+  object-fit: cover;
+  border-radius: 10px;
+  justify-self: flex-end;
+  align-self: flex-start;
+}
+@media (pointer: fine) {
+  .student__link:hover {
+    opacity: 0.7;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .student {
+    padding: 90px 50px 90px;
+  }
+  .student__name {
+    font-size: 40px;
+    line-height: 40px;
+    padding-bottom: 16px;
+  }
+  .student__job {
+    font-size: 12px;
+    line-height: 18px;
+    padding-bottom: 20px;
+  }
+  .student__about {
+    max-width: 364px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+  .student__photo {
+    width: 255px;
+    height: 307px;
+  }
+  .student__link {
+    padding-top: 87px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .student {
+    padding: 70px 14px 70px;
+  }
+  .student__wrapper {
+    flex-direction: column-reverse;
+    padding-top: 60px;
+  }
+  .student__photo {
+    width: 292px;
+    height: 352px;
+    margin: 0 auto;
+  }
+  .student__name {
+    font-size: 30px;
+    line-height: 36px;
+    padding-top: 40px;
+  }
+  .student__job {
+    font-size: 11px;
+    line-height: 16px;
+    padding-bottom: 20px;
+  }
+  .student__about {
+    font-size: 11px;
+    line-height: 16px;
+  }
+  .student__link {
+    padding-top: 42px;
+  }
+}
