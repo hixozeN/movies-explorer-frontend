@@ -5,12 +5,14 @@ import BurgerMenu from './BurgerMenu/BurgerMenu';
 import { DeviceContext } from '../../contexts/DeviceContext/DeviceContext';
 import { useLocation } from 'react-router-dom';
 import NavPromo from './NavPromo/NavPromo';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext/CurrentUserContext';
 
 const Navigation = () => {
   const location = useLocation();
   const [menuActive, setMenuActive] = useState(false);
   const device = useContext(DeviceContext);
   const [isDesktop, setDesktop] = useState(true);
+  const { isLoggedIn } = useContext(CurrentUserContext);
 
   const handleMenu = () => {
     setMenuActive(!menuActive);
@@ -27,7 +29,7 @@ const Navigation = () => {
 
   return (
     <>
-      {location.pathname === '/' ? (
+      {(location.pathname === '/' && !isLoggedIn) ? (
         <NavPromo />
       ) : (
         <>

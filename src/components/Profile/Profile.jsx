@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Profile.css';
 import Header from '../Header/Header';
 import useFormAndValidation from '../../hooks/FormValidation/useFormValidation';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext/CurrentUserContext';
 
 const Profile = ({ onLogout }) => {
-  // temp state
-  const [currentUser, setCurrentUser] = useState({ name: 'Виталий', email: 'pochta@yandex.ru' });
+  const currentUser = useContext(CurrentUserContext);
   const { values, errors, isValid, handleChange } = useFormAndValidation({
     name: currentUser.name,
     email: currentUser.email,
@@ -66,7 +66,7 @@ const Profile = ({ onLogout }) => {
             <button
               type='submit'
               className='profile__button profile__button_type_submit'
-              // disabled={!isValid}
+              disabled={!isValid}
             >
               Сохранить
             </button>
