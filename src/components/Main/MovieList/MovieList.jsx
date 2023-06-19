@@ -1,47 +1,66 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './MovieList.css';
-import { films } from '../../../data/filmsData';
 import Movie from '../Movie/Movie';
 import { useLocation } from 'react-router-dom';
 import { DeviceContext } from '../../../contexts/DeviceContext/DeviceContext';
 import Preloader from '../../Preloader/Preloader';
 
-const MovieList = () => {
+const MovieList = ({ movies, savedMovies }) => {
   const location = useLocation();
   const device = useContext(DeviceContext);
-  const [movies, setMovies] = useState(films);
   const [showMoreFilmsButton, setShowMoreFilmsButton] = useState(true);
-  const [firstRenderCount, setFirstRenderCount] = useState(0);
+  const [renderCount, setRenderCount] = useState(0);
   const [page, setPage] = useState(0);
   const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
-    const calcFilmsToRender = (device) => {
-      const configForFilmsRender = {
-        desktop: {
-          renderCount: 12,
-          additionalRender: 3,
-        },
-        tablet: {
-          renderCount: 8,
-          additionalRender: 2,
-        },
-        mobile: {
-          renderCount: 5,
-          additionalRender: 1,
-        },
-      };
-
-      return (
-        configForFilmsRender[device].renderCount +
-        configForFilmsRender[device].additionalRender * page
-      );
+    const configForFilmsRender = {
+      desktop: {
+        renderCount: 12,
+        additionalRender: 3,
+      },
+      tablet: {
+        renderCount: 8,
+        additionalRender: 2,
+      },
+      mobile: {
+        renderCount: 5,
+        additionalRender: 2,
+      },
     };
 
-    setFirstRenderCount(calcFilmsToRender(device));
+    setRenderCount(configForFilmsRender[device].renderCount + configForFilmsRender[device].additionalRender * page);
 
-    if (movies.length <= calcFilmsToRender(device)) setShowMoreFilmsButton(false);
-  }, [device, movies, page]);
+    movies.length >= renderCount ? setShowMoreFilmsButton(true) : setShowMoreFilmsButton(false);
+
+  }, [device, movies, renderCount, page]);
+
+  const isSavedMovie = (movie) => {
+    return savedMovies.reduce((acc, saved) => {
+      if (saved.movieId === movie.id) {
+        return true;
+      }
+      return acc;
+    }, false);
+  };
+
+  const renderMovies = (renderCount) => {
+    if (movies) {
+      return movies.slice(0, renderCount).map((film) => {
+        return (
+          <Movie
+            key={film.id}
+            name={film.nameRU}
+            duration={film.duration}
+            link={`https://api.nomoreparties.co${film.image.url}`}
+            saved={isSavedMovie(film)}
+          />
+        );
+      });
+    } else {
+      return 'empty';
+    }
+  };
 
   const handleClickRenderMore = () => {
     setShowMoreFilmsButton(false);
@@ -55,33 +74,7 @@ const MovieList = () => {
 
   return (
     <main className='movies'>
-      <ul className='movies__list'>
-        {location.pathname === '/movies'
-          ? movies.slice(0, firstRenderCount).map((film) => {
-              return (
-                <Movie
-                  key={film._id}
-                  name={film.name}
-                  duration={film.duration}
-                  link={film.link}
-                  saved={film.saved}
-                />
-              );
-            })
-          : movies
-              .filter((film) => film.saved)
-              .map((film) => {
-                return (
-                  <Movie
-                    key={film._id}
-                    name={film.name}
-                    duration={film.duration}
-                    link={film.link}
-                    saved={film.saved}
-                  />
-                );
-              })}
-      </ul>
+      <ul className='movies__list'>{movies.length > 0 ? renderMovies(renderCount) : 'Введите название фильма'}</ul>
       <div className='movies__paggination-wrapper'>
         {showMoreFilmsButton && (
           <button

@@ -1,4 +1,4 @@
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import './App.css';
 import { Suspense, useEffect, useState } from 'react';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext/CurrentUserContext';
@@ -16,13 +16,20 @@ import api from '../../utils/MainApi';
 import { ApiServiceContext } from '../../contexts/ApiServiceContext/ApiServiceContext';
 import { LOCAL_STORAGE_TOKEN_KEY } from '../../utils/globalVars';
 import InfoTooltip from '../Popup/InfoTooltip/InfoTooltip';
+import beatApi from '../../utils/MoviesApi';
+import { MoviesContext } from '../../contexts/MoviesContext/MoviesContext';
 
 const App = () => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+
   const [currentUser, setCurrentUser] = useState({
     isLoggedIn: localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY) ? true : false,
   });
   const [device, setDevice] = useState('desktop');
+  const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
+
   const [isInfoPopupOpen, setInfoPopupOpen] = useState(false);
 
   // testovoe
@@ -49,6 +56,41 @@ const App = () => {
     checkToken();
   }, []);
 
+  useEffect(() => {
+    if (currentUser.isLoggedIn && (pathname === '/signin' || pathname === '/signup')) {
+      navigate('/movies', { replace: true });
+    }
+  }, [pathname, navigate, currentUser.isLoggedIn]);
+
+  // useEffect(() => {
+  //   currentUser.isLoggedIn && fetchMovieList();
+  // }, [currentUser.isLoggedIn])
+
+  // const fetchMovieList = async () => {
+  //   try {
+  //     const movies = await beatApi.getMovies();
+  //     setMovieList([...movies]);
+  //     console.log("отработал фетч фильмов")
+  //   } catch (e) {
+  //     console.error(e);
+  //   }
+  // };
+
+  useEffect(() => {
+    if (currentUser.isLoggedIn) {
+      beatApi.getMovies()
+        .then(setMovies)
+        .catch((e) => {
+          console.error(e);
+        })
+      api.getSavedMovies()
+        .then((movies) => setSavedMovies(movies.data))
+        .catch((e) => {
+          console.error(e);
+        })
+    }
+  }, [currentUser.isLoggedIn])
+
   const checkToken = async () => {
     if (localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)) {
       try {
@@ -62,7 +104,7 @@ const App = () => {
       } catch (e) {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
         setCurrentUser((prev) => ({ ...prev, isLoggedIn: false }));
-        console.log(e);
+        console.error(e);
       }
     }
   };
@@ -102,13 +144,12 @@ const App = () => {
     try {
       enableLoader();
       const newUser = await api.register({ email, password, name });
+      handleLogin({ email, password })
       setInfoPopupOpen(true);
       setApiService((prev) => ({
         ...prev,
-        successText: `${newUser.name}, Вы успешно зарегистрировались.\nИспользуйте почту для входа: ${newUser.email}`,
+        successText: `${newUser.name}, Вы успешно зарегистрировались.`,
       }));
-      navigate('/signin');
-      console.log(newUser);
     } catch (e) {
       handleError(e);
     } finally {
@@ -153,7 +194,7 @@ const App = () => {
               <Route element={<ProtectedRoute />}>
                 <Route
                   path='/movies'
-                  element={<MainPage />}
+                  element={<MainPage movies={movies} savedMovies={savedMovies} />}
                 />
                 <Route
                   path='/saved-movies'

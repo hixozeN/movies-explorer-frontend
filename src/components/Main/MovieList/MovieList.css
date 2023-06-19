@@ -10,6 +10,7 @@
   list-style: none;
   display: grid;
   grid-template-columns: repeat(3, minmax(1%, 1fr));
+  /* grid-template-rows: repeat(8, 249px); */
   gap: 30px 24px;
 }
 .movies__paggination-wrapper {
