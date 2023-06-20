@@ -4,14 +4,15 @@ import Movie from '../Movie/Movie';
 import { useLocation } from 'react-router-dom';
 import { DeviceContext } from '../../../contexts/DeviceContext/DeviceContext';
 import Preloader from '../../Preloader/Preloader';
+import { BEAT_API_URL } from '../../../utils/globalVars';
 
-const MovieList = ({ movies, savedMovies }) => {
+const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete }) => {
   const location = useLocation();
   const device = useContext(DeviceContext);
   const [showMoreFilmsButton, setShowMoreFilmsButton] = useState(true);
   const [renderCount, setRenderCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [isLoading, setLoading] = useState(false);
+  const [isPagginationLoading, setPagginationLoading] = useState(false);
 
   useEffect(() => {
     const configForFilmsRender = {
@@ -29,52 +30,71 @@ const MovieList = ({ movies, savedMovies }) => {
       },
     };
 
-    setRenderCount(configForFilmsRender[device].renderCount + configForFilmsRender[device].additionalRender * page);
+    setRenderCount(
+      configForFilmsRender[device].renderCount +
+        configForFilmsRender[device].additionalRender * page
+    );
 
     movies.length >= renderCount ? setShowMoreFilmsButton(true) : setShowMoreFilmsButton(false);
-
   }, [device, movies, renderCount, page]);
 
   const isSavedMovie = (movie) => {
     return savedMovies.reduce((acc, saved) => {
       if (saved.movieId === movie.id) {
+        movie._id = saved._id;
         return true;
       }
       return acc;
     }, false);
   };
 
+  const getImageLink = (movie) => {
+    return movie.movieId
+      ? movie.image
+      : BEAT_API_URL + movie.image.url
+  }
+
+  const getMovieId = (movie) => {
+    return movie.movieId
+      ? movie.movieId
+      : movie.id
+  }
+
   const renderMovies = (renderCount) => {
-    if (movies) {
+    if (movies.length > 0) {
       return movies.slice(0, renderCount).map((film) => {
         return (
+          // убрать лишние пропсы, сделать деструктуризацию от movieData внутри компонента
           <Movie
-            key={film.id}
+            key={getMovieId(film)}
             name={film.nameRU}
             duration={film.duration}
-            link={`https://api.nomoreparties.co${film.image.url}`}
+            link={getImageLink(film)}
             saved={isSavedMovie(film)}
+            movieData={film}
+            onSave={onSave}
+            onDelete={onDelete}
           />
         );
       });
     } else {
-      return 'empty';
+      return text;
     }
   };
 
   const handleClickRenderMore = () => {
     setShowMoreFilmsButton(false);
-    setLoading(true);
+    setPagginationLoading(true);
     setTimeout(() => {
       setShowMoreFilmsButton(true);
-      setLoading(false);
+      setPagginationLoading(false);
       setPage((prev) => prev + 1);
-    }, 500);
+    }, 200);
   };
 
   return (
     <main className='movies'>
-      <ul className='movies__list'>{movies.length > 0 ? renderMovies(renderCount) : 'Введите название фильма'}</ul>
+      <ul className='movies__list'>{isLoading ? <Preloader /> : renderMovies(renderCount)}</ul>
       <div className='movies__paggination-wrapper'>
         {showMoreFilmsButton && (
           <button
@@ -89,7 +109,7 @@ const MovieList = ({ movies, savedMovies }) => {
             Ещё
           </button>
         )}
-        {isLoading && <Preloader />}
+        {isPagginationLoading && <Preloader />}
       </div>
     </main>
   );

@@ -14,10 +14,9 @@ import { SavedMoviesPage } from '../SavedMovies/SavedMovies.lazy';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import api from '../../utils/MainApi';
 import { ApiServiceContext } from '../../contexts/ApiServiceContext/ApiServiceContext';
-import { LOCAL_STORAGE_TOKEN_KEY } from '../../utils/globalVars';
+import { BEAT_API_URL, LOCAL_STORAGE_TOKEN_KEY } from '../../utils/globalVars';
 import InfoTooltip from '../Popup/InfoTooltip/InfoTooltip';
 import beatApi from '../../utils/MoviesApi';
-import { MoviesContext } from '../../contexts/MoviesContext/MoviesContext';
 
 const App = () => {
   const navigate = useNavigate();
@@ -62,34 +61,22 @@ const App = () => {
     }
   }, [pathname, navigate, currentUser.isLoggedIn]);
 
-  // useEffect(() => {
-  //   currentUser.isLoggedIn && fetchMovieList();
-  // }, [currentUser.isLoggedIn])
-
-  // const fetchMovieList = async () => {
-  //   try {
-  //     const movies = await beatApi.getMovies();
-  //     setMovieList([...movies]);
-  //     console.log("отработал фетч фильмов")
-  //   } catch (e) {
-  //     console.error(e);
-  //   }
-  // };
-
   useEffect(() => {
     if (currentUser.isLoggedIn) {
-      beatApi.getMovies()
+      beatApi
+        .getMovies()
         .then(setMovies)
         .catch((e) => {
           console.error(e);
-        })
-      api.getSavedMovies()
+        });
+      api
+        .getSavedMovies()
         .then((movies) => setSavedMovies(movies.data))
         .catch((e) => {
           console.error(e);
-        })
+        });
     }
-  }, [currentUser.isLoggedIn])
+  }, [currentUser.isLoggedIn]);
 
   const checkToken = async () => {
     if (localStorage.getItem(LOCAL_STORAGE_TOKEN_KEY)) {
@@ -144,7 +131,7 @@ const App = () => {
     try {
       enableLoader();
       const newUser = await api.register({ email, password, name });
-      handleLogin({ email, password })
+      handleLogin({ email, password });
       setInfoPopupOpen(true);
       setApiService((prev) => ({
         ...prev,
@@ -160,6 +147,34 @@ const App = () => {
     setCurrentUser((prev) => ({ ...prev, isLoggedIn: false }));
     localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
     navigate('/', { replace: true });
+  };
+
+  const handleClickSaveMovie = (movie) => {
+    const movieData = {
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: BEAT_API_URL + movie.image.url,
+      trailerLink: movie.trailerLink,
+      thumbnail: BEAT_API_URL + movie.image.formats.thumbnail.url,
+      movieId: movie.id,
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    };
+
+    api
+      .saveMovie(movieData)
+      .then((savedMovie) => setSavedMovies((movies) => [...movies, savedMovie.data]))
+      .catch((e) => console.error(e));
+  };
+
+  const handleClickDeleteMovie = (movieId) => {
+    api
+      .deleteMovie(movieId)
+      .then(() => setSavedMovies((films) => films.filter((movie) => movie._id !== movieId)))
+      .catch((e) => console.error(e));
   };
 
   return (
@@ -194,11 +209,24 @@ const App = () => {
               <Route element={<ProtectedRoute />}>
                 <Route
                   path='/movies'
-                  element={<MainPage movies={movies} savedMovies={savedMovies} />}
+                  element={
+                    <MainPage
+                      movies={movies}
+                      savedMovies={savedMovies}
+                      onSave={handleClickSaveMovie}
+                      onDelete={handleClickDeleteMovie}
+                    />
+                  }
                 />
                 <Route
                   path='/saved-movies'
-                  element={<SavedMoviesPage />}
+                  element={
+                    <SavedMoviesPage
+                      movies={savedMovies}
+                      savedMovies={savedMovies}
+                      onDelete={handleClickDeleteMovie}
+                    />
+                  }
                 />
                 <Route
                   path='/profile'

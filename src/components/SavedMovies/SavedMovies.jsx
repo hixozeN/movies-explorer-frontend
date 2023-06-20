@@ -3,13 +3,25 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import MovieList from '../Main/MovieList/MovieList';
 import MovieSearch from '../Main/MovieSearch/MovieSearch';
+import { useSearchFilms } from '../../hooks/SearchFilms/useSearchFilms';
 
-const SavedMovies = ({ isLoggedIn }) => {
+const SavedMovies = ({ isLoggedIn, movies, onDelete }) => {
+  const { sortedMovies, handleSearch, isLoading, text } = useSearchFilms(movies);
+  console.log('рендер сохран')
+  console.log(sortedMovies)
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />
-      <MovieSearch />
-      <MovieList />
+      <MovieSearch
+        onSubmit={handleSearch}
+      />
+      <MovieList
+        movies={sortedMovies}
+        savedMovies={sortedMovies}
+        isLoading={isLoading}
+        text={text}
+        onDelete={onDelete}
+      />
       <Footer />
     </>
   );

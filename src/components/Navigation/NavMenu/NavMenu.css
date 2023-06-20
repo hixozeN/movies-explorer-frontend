@@ -19,6 +19,7 @@
 }
 .header__link_active {
   font-weight: 500;
+  border-bottom: 1px solid #000;
 }
 .header__link_type_default {
   font-weight: 400;
