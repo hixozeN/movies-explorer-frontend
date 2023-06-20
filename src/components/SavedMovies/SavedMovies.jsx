@@ -6,7 +6,10 @@ import MovieSearch from '../Main/MovieSearch/MovieSearch';
 import { useSearchFilms } from '../../hooks/SearchFilms/useSearchFilms';
 
 const SavedMovies = ({ isLoggedIn, movies, onDelete }) => {
-  const { sortedMovies, handleSearch, isLoading, text } = useSearchFilms(movies);
+  const { sortedMovies, handleSearch, isLoading, text } = useSearchFilms({
+    movies: movies,
+    isShowData: true,
+  });
   console.log('рендер сохран')
   console.log(sortedMovies)
   return (

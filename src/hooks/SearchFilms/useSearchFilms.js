@@ -1,10 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
-export function useSearchFilms(movies) {
+export function useSearchFilms({ movies, isShowData }) {
   const [sortedMovies, setSortedMovies] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [text, setText] = useState('Для просмотра фильмов введите название фильма в строку поиска.');
   // const [lastSearchQuery, setLastSearchQuery] = useState({});
+
+  useEffect(() => {
+    if (isShowData) {
+      setSortedMovies(movies);
+    }
+  }, [isShowData, movies]);
   
   const filterMovies = (movies, query) => {
     const { searchString, isShortMovie } = query;

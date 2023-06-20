@@ -5,7 +5,10 @@ import MovieSearch from './MovieSearch/MovieSearch';
 import { useSearchFilms } from '../../hooks/SearchFilms/useSearchFilms';
 
 const Main = ({ movies, savedMovies, onSave, onDelete }) => {
-  const { sortedMovies, handleSearch, isLoading, text, } = useSearchFilms(movies);
+  const { sortedMovies, handleSearch, isLoading, text, } = useSearchFilms({
+    movies: movies,
+    isShowData: false,
+  });
 
   return (
     <>
