@@ -47,6 +47,7 @@ const Profile = ({ onLogout, onSubmit }) => {
           name='profile'
           className='profile__form'
           onSubmit={handleSubmit}
+          noValidate
         >
           <label className='profile__label'>
             <span className='profile__input-title'>Имя</span>

@@ -23,6 +23,7 @@ const AuthForm = ({ isRegForm, onLogin, onRegister }) => {
       name={isRegForm ? 'register' : 'login'}
       className='form'
       onSubmit={handleSubmit}
+      noValidate
     >
       {isRegForm && (
         <Label
@@ -56,7 +57,7 @@ const AuthForm = ({ isRegForm, onLogin, onRegister }) => {
       <button
         type='submit'
         className={`form__submit-button ${!isValid && 'form__submit-button_disabled'}`}
-        // disabled={!isValid}
+        disabled={!isValid}
       >
         {isRegForm ? 'Зарегистрироваться' : 'Войти'}
       </button>}
