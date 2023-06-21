@@ -8,10 +8,9 @@ import { useSearchFilms } from '../../hooks/SearchFilms/useSearchFilms';
 const SavedMovies = ({ isLoggedIn, movies, onDelete }) => {
   const { sortedMovies, handleSearch, isLoading, text } = useSearchFilms({
     movies: movies,
-    isShowData: true,
+    isSavedPage: true,
   });
-  console.log('рендер сохран')
-  console.log(sortedMovies)
+
   return (
     <>
       <Header isLoggedIn={isLoggedIn} />

@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './MovieSearch.css';
+import { useLocation } from 'react-router-dom';
+import { LOCAL_STORAGE_LAST_SEARCH_QUERY } from '../../../utils/globalVars';
 
 const MovieSearch = ({ onSubmit, isLoading }) => {
+  const location = useLocation();
   const [searchQuery, setSearchQuery] = useState({
     searchString: '',
     isShortMovie: false,
   });
-  
+
+  useEffect(() => {
+    if (location.pathname === '/movies') {
+      const { searchString, isShortMovie } = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LAST_SEARCH_QUERY));
+      setSearchQuery({
+        searchString, isShortMovie
+      })
+    }
+  }, [location])
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!searchQuery.searchString) {
+      console.log('пусто')
+    }
     onSubmit(searchQuery);
   };
 
@@ -18,6 +33,7 @@ const MovieSearch = ({ onSubmit, isLoading }) => {
 
   const handleChangeCheckbox = (e) => {
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
+    onSubmit({ ...searchQuery, isShortMovie: e.target.checked, });
   };
 
   return (
@@ -32,6 +48,7 @@ const MovieSearch = ({ onSubmit, isLoading }) => {
         onChange={handleChange}
         name='searchString'
         disabled={isLoading}
+        value={searchQuery.searchString}
       />
       <label className='search__label'>
         <input
@@ -39,6 +56,7 @@ const MovieSearch = ({ onSubmit, isLoading }) => {
           className='search__checkbox-input'
           name='isShortMovie'
           onChange={handleChangeCheckbox}
+          checked={searchQuery.isShortMovie}
           disabled={isLoading}
         />
         <span className='search__checkbox-span'></span>

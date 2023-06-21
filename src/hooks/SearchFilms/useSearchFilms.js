@@ -1,45 +1,48 @@
 import { useEffect, useState } from 'react';
+import { LOCAL_STORAGE_LAST_SEARCH_QUERY } from '../../utils/globalVars';
+import { createData } from '../../utils/searchHelper';
 
-export function useSearchFilms({ movies, isShowData }) {
+/*
+  movies - массив входящих фильмов
+  isSavedPage - страница сохранёнок
+  isMoviesPage - основная страница фильмов
+*/
+
+export function useSearchFilms({ movies, isSavedPage, isMoviesPage }) {
   const [sortedMovies, setSortedMovies] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [text, setText] = useState('Для просмотра фильмов введите название фильма в строку поиска.');
-  // const [lastSearchQuery, setLastSearchQuery] = useState({});
+  const [lastSearchQuery, setLastSearchQuery] = useState({
+    queryString: '',
+    isShortMovie: false,
+    data: [],
+  });
 
   useEffect(() => {
-    if (isShowData) {
+    if (isSavedPage) {
       setSortedMovies(movies);
     }
-  }, [isShowData, movies]);
-  
-  const filterMovies = (movies, query) => {
-    const { searchString, isShortMovie } = query;
+  }, [isSavedPage, movies]);
 
-    if (isShortMovie) {
-      return setSortedMovies(movies.filter((movie) => movie.nameRU.toLowerCase().includes(searchString.toLowerCase()) && movie.duration <= 40));
-    } else {
-      return setSortedMovies(movies.filter((movie) => movie.nameRU.toLowerCase().includes(searchString.toLowerCase())));
+  useEffect(() => {
+    if (LOCAL_STORAGE_LAST_SEARCH_QUERY in localStorage) {
+      setLastSearchQuery(JSON.parse(localStorage.getItem(LOCAL_STORAGE_LAST_SEARCH_QUERY)));
     }
-  };
+  }, [isMoviesPage]);
 
-  // const saveSearchQueryToSessionStorage = (searchQuery) => {
-  //   sessionStorage.setItem(SESSION_STORAGE_LAST_SEARCH_QUERY, JSON.stringify(searchQuery));
-  // }
-
-  // function getSearchQueryFromLocalStorage() {
-  //   const searchQuery = sessionStorage.getItem(SESSION_STORAGE_LAST_SEARCH_QUERY);
-  //   if (searchQuery) {
-  //     setLastSearchQuery(searchQuery);
-  //   }
-  // }
+  useEffect(() => {
+    if (isMoviesPage) {
+      setSortedMovies(lastSearchQuery.data);
+    }
+  }, [isMoviesPage, lastSearchQuery]);
 
   const handleSearch = (searchQuery) => {
-    // saveSearchQueryToSessionStorage(searchQuery);
     setLoading(true);
 
-    filterMovies(movies, searchQuery);
+    const data = createData(movies, searchQuery);
+    setSortedMovies(data);
 
-    if (sortedMovies.length === 0) {
+    if (data.length === 0) {
       setText('Ничего не найдено. Попробуйте поменять параметры поиска.');
     }
 
@@ -48,7 +51,17 @@ export function useSearchFilms({ movies, isShowData }) {
       setSortedMovies([]);
     }
 
-    setTimeout(() => setLoading(false), 200);
+    setTimeout(() => {
+      setLoading(false);
+    }, 200);
+
+    if (isMoviesPage) {
+      localStorage.setItem(LOCAL_STORAGE_LAST_SEARCH_QUERY, JSON.stringify({
+        searchString: searchQuery.searchString,
+        isShortMovie: searchQuery.isShortMovie,
+        data: data,
+      }));
+    }
   };
   
   return { sortedMovies, handleSearch, isLoading, text, };

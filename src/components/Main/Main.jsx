@@ -7,7 +7,8 @@ import { useSearchFilms } from '../../hooks/SearchFilms/useSearchFilms';
 const Main = ({ movies, savedMovies, onSave, onDelete }) => {
   const { sortedMovies, handleSearch, isLoading, text, } = useSearchFilms({
     movies: movies,
-    isShowData: false,
+    isSavedPage: false,
+    isMoviesPage: true,
   });
 
   return (
