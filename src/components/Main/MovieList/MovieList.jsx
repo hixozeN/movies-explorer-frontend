@@ -7,7 +7,7 @@ import Preloader from '../../Preloader/Preloader';
 import { BEAT_API_URL } from '../../../utils/globalVars';
 import SearchMessage from '../SearchMessage/SearchMessage';
 
-const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete }) => {
+const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete, onTrailerClick }) => {
   const location = useLocation();
   const device = useContext(DeviceContext);
   const [showMoreFilmsButton, setShowMoreFilmsButton] = useState(true);
@@ -65,7 +65,6 @@ const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete }) =
     if (movies.length > 0) {
       return movies.slice(0, renderCount).map((film) => {
         return (
-          // убрать лишние пропсы, сделать деструктуризацию от movieData внутри компонента
           <Movie
             key={getMovieId(film)}
             name={film.nameRU}
@@ -75,6 +74,7 @@ const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete }) =
             movieData={film}
             onSave={onSave}
             onDelete={onDelete}
+            onTrailerClick={onTrailerClick}
           />
         );
       });

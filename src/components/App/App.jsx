@@ -17,6 +17,7 @@ import { ApiServiceContext } from '../../contexts/ApiServiceContext/ApiServiceCo
 import { BEAT_API_URL, LOCAL_STORAGE_TOKEN_KEY } from '../../utils/globalVars';
 import InfoTooltip from '../Popup/InfoTooltip/InfoTooltip';
 import beatApi from '../../utils/MoviesApi';
+import PopupVideo from '../Popup/PopupVideo/PopupVideo';
 
 const App = () => {
   const navigate = useNavigate();
@@ -28,8 +29,10 @@ const App = () => {
   const [device, setDevice] = useState('desktop');
   const [movies, setMovies] = useState([]);
   const [savedMovies, setSavedMovies] = useState([]);
+  const [currentMovie, setCurrentMovie] = useState({});
 
   const [isInfoPopupOpen, setInfoPopupOpen] = useState(false);
+  const [isVideoPopupOpen, setVideoPopupOpen] = useState(false);
 
   // testovoe
   const [apiService, setApiService] = useState({});
@@ -52,8 +55,10 @@ const App = () => {
   }, [device]);
 
   useEffect(() => {
-    checkToken();
-  }, []);
+    if(currentUser.isLoggedIn) {
+      checkToken();
+    }
+  }, [currentUser.isLoggedIn]);
 
   useEffect(() => {
     if (currentUser.isLoggedIn && (pathname === '/signin' || pathname === '/signup')) {
@@ -89,16 +94,19 @@ const App = () => {
           isLoggedIn: true,
         }));
       } catch (e) {
-        localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+        localStorage.clear();
         setCurrentUser((prev) => ({ ...prev, isLoggedIn: false }));
-        console.error(e);
+        handleError('С токеном что-то не так. Авторизуйтесь заново.')
       }
     }
   };
 
   const closeAllPopups = () => {
     setInfoPopupOpen(false);
-    setApiService((prev) => ({ ...prev, isError: false }));
+    setVideoPopupOpen(false);
+    setTimeout(() => {
+      setApiService((prev) => ({ ...prev, isError: false }));
+    }, 200);
   };
 
   const enableLoader = () => {
@@ -112,6 +120,10 @@ const App = () => {
   const handleError = (e) => {
     setApiService((prev) => ({ ...prev, isError: true, errorText: e }));
     setInfoPopupOpen(true);
+  };
+
+  const handleSearchError = () => {
+    handleError('Для поиска нужно ввести запрос.');
   };
 
   const handleLogin = async ({ email, password }) => {
@@ -145,8 +157,20 @@ const App = () => {
   };
   const handleLogout = () => {
     setCurrentUser((prev) => ({ ...prev, isLoggedIn: false }));
-    localStorage.removeItem(LOCAL_STORAGE_TOKEN_KEY);
+    localStorage.clear();
     navigate('/', { replace: true });
+  };
+
+  const handleOpenMovieTrailer = (movie) => {
+    try {
+      enableLoader();
+      setVideoPopupOpen(true);
+      setCurrentMovie(movie);
+    } catch (e) {
+      handleError(e);
+    } finally {
+      setTimeout(() => disableLoader(), 200);
+    }
   };
 
   const handleClickSaveMovie = (movie) => {
@@ -239,6 +263,8 @@ const App = () => {
                       savedMovies={savedMovies}
                       onSave={handleClickSaveMovie}
                       onDelete={handleClickDeleteMovie}
+                      onError={handleSearchError}
+                      onTrailerClick={handleOpenMovieTrailer}
                     />
                   }
                 />
@@ -249,6 +275,8 @@ const App = () => {
                       movies={savedMovies}
                       savedMovies={savedMovies}
                       onDelete={handleClickDeleteMovie}
+                      onError={handleSearchError}
+                      onTrailerClick={handleOpenMovieTrailer}
                     />
                   }
                 />
@@ -272,6 +300,12 @@ const App = () => {
           <InfoTooltip
             isOpen={isInfoPopupOpen}
             onClose={closeAllPopups}
+          />
+          <PopupVideo
+            isOpen={isVideoPopupOpen}
+            onClose={closeAllPopups}
+            name={currentMovie.nameRU}
+            link={currentMovie.trailerLink}
           />
         </ApiServiceContext.Provider>
       </DeviceContext.Provider>

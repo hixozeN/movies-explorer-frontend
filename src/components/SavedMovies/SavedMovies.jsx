@@ -5,7 +5,7 @@ import MovieList from '../Main/MovieList/MovieList';
 import MovieSearch from '../Main/MovieSearch/MovieSearch';
 import { useSearchFilms } from '../../hooks/SearchFilms/useSearchFilms';
 
-const SavedMovies = ({ isLoggedIn, movies, onDelete }) => {
+const SavedMovies = ({ isLoggedIn, movies, onDelete, onError }) => {
   const { sortedMovies, handleSearch, isLoading, text } = useSearchFilms({
     movies: movies,
     isSavedPage: true,
@@ -16,6 +16,8 @@ const SavedMovies = ({ isLoggedIn, movies, onDelete }) => {
       <Header isLoggedIn={isLoggedIn} />
       <MovieSearch
         onSubmit={handleSearch}
+        movies={sortedMovies}
+        onError={onError}
       />
       <MovieList
         movies={sortedMovies}

@@ -20,7 +20,7 @@
 }
 .popup__content {
   box-sizing: border-box;
-  width: 430px;
+  /* width: 430px; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -45,6 +45,17 @@
   height: 32px;
   transition: opacity 0.3s linear;
 }
+.popup__tooltip-wrapper {
+  width: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.popup__iframe {
+  width: 60vw;
+  height: 60vh;
+  border: none;
+}
 @media (pointer: fine) {
   .popup__close-button:hover {
     opacity: 0.6;
@@ -53,8 +64,10 @@
 
 @media screen and (max-width: 720px) {
   .popup__content {
-    max-width: 282px;
     padding: 22px 22px;
+  }
+  .popup__tooltip-wrapper {
+    max-width: 282px;
   }
   .popup__close-button {
     right: 0;

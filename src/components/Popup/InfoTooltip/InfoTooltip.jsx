@@ -11,8 +11,10 @@ const InfoTooltip = ({ isOpen, name, onClose }) => {
       name={name}
       onClose={onClose}
     >
-      <h2>{isError ? 'Ошибка' : 'Успешно'}</h2>
-      <p>{isError ? errorText : successText }</p>
+      <div className='popup__tooltip-wrapper'>
+        <h2>{isError ? 'Ошибка' : 'Успешно'}</h2>
+        <p>{isError ? errorText : successText}</p>
+      </div>
     </Popup>
   );
 };
