@@ -21,7 +21,7 @@ const useFormAndValidation = (initialValues = {}, initialErrors = {}, initialVal
     [setValues, setErrors, setValid]
   );
 
-  return { values, errors, isValid, handleChange, resetForm, setValues };
+  return { values, errors, isValid, handleChange, resetForm, setValues, setValid };
 };
 
 export default useFormAndValidation;

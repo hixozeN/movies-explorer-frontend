@@ -177,6 +177,20 @@ const App = () => {
       .catch((e) => console.error(e));
   };
 
+  const handleChangeProfileData = ({ name, email }) => {
+    enableLoader();
+    api.setUserInfo({ name, email })
+      .then((userData) => {
+        setCurrentUser((currentUser) => ({ ...currentUser, name: userData.data.name, email: userData.data.email }));
+      })
+      .catch((e) => {
+        handleError(e);
+      })
+      .finally(() => {
+        disableLoader();
+      });
+  };
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <DeviceContext.Provider value={device}>
@@ -230,7 +244,7 @@ const App = () => {
                 />
                 <Route
                   path='/profile'
-                  element={<ProfilePage onLogout={handleLogout} />}
+                  element={<ProfilePage onLogout={handleLogout} onSubmit={handleChangeProfileData} />}
                 />
               </Route>
 
