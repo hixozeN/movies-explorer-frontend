@@ -5,3 +5,5 @@
 
 Ссылка на проект: https://diploma.hixozen.ru
 Ссылка на API: https://api.diploma.hixozen.ru
+
+Ссылка на PR: https://github.com/hixozeN/movies-explorer-frontend/pull/2
