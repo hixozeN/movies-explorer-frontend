@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { DeviceContext } from '../../../contexts/DeviceContext/DeviceContext';
 import Preloader from '../../Preloader/Preloader';
 import { BEAT_API_URL } from '../../../utils/globalVars';
+import SearchMessage from '../SearchMessage/SearchMessage';
 
 const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete }) => {
   const location = useLocation();
@@ -77,8 +78,6 @@ const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete }) =
           />
         );
       });
-    } else {
-      return text;
     }
   };
 
@@ -94,6 +93,7 @@ const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete }) =
 
   return (
     <main className='movies'>
+      {movies.length === 0 && <SearchMessage>{text}</SearchMessage>}
       <ul className='movies__list'>{isLoading ? <Preloader /> : renderMovies(renderCount)}</ul>
       <div className='movies__paggination-wrapper'>
         {showMoreFilmsButton && (

@@ -179,9 +179,19 @@ const App = () => {
 
   const handleChangeProfileData = ({ name, email }) => {
     enableLoader();
-    api.setUserInfo({ name, email })
+    api
+      .setUserInfo({ name, email })
       .then((userData) => {
-        setCurrentUser((currentUser) => ({ ...currentUser, name: userData.data.name, email: userData.data.email }));
+        setCurrentUser((currentUser) => ({
+          ...currentUser,
+          name: userData.data.name,
+          email: userData.data.email,
+        }));
+        setInfoPopupOpen(true);
+        setApiService((prev) => ({
+          ...prev,
+          successText: `Данные обновлены.`,
+        }));
       })
       .catch((e) => {
         handleError(e);
@@ -244,7 +254,12 @@ const App = () => {
                 />
                 <Route
                   path='/profile'
-                  element={<ProfilePage onLogout={handleLogout} onSubmit={handleChangeProfileData} />}
+                  element={
+                    <ProfilePage
+                      onLogout={handleLogout}
+                      onSubmit={handleChangeProfileData}
+                    />
+                  }
                 />
               </Route>
 

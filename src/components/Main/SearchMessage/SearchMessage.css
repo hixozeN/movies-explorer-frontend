@@ -1,0 +1,8 @@
+.movies__message-wrapper {
+  display: flex;
+  justify-content: center;
+}
+.movies__message-text {
+  font-size: 18px;
+  font-weight: 400;
+}

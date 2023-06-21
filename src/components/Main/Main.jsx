@@ -15,6 +15,7 @@ const Main = ({ movies, savedMovies, onSave, onDelete }) => {
       <Header />
       <MovieSearch
         onSubmit={handleSearch}
+        isLoading={isLoading}
       />
       <MovieList
         movies={sortedMovies}

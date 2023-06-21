@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './MovieSearch.css';
 
-const MovieSearch = ({ onSubmit }) => {
+const MovieSearch = ({ onSubmit, isLoading }) => {
   const [searchQuery, setSearchQuery] = useState({
     searchString: '',
     isShortMovie: false,
@@ -31,6 +31,7 @@ const MovieSearch = ({ onSubmit }) => {
         placeholder='Фильм'
         onChange={handleChange}
         name='searchString'
+        disabled={isLoading}
       />
       <label className='search__label'>
         <input
@@ -38,6 +39,7 @@ const MovieSearch = ({ onSubmit }) => {
           className='search__checkbox-input'
           name='isShortMovie'
           onChange={handleChangeCheckbox}
+          disabled={isLoading}
         />
         <span className='search__checkbox-span'></span>
         <p className='search__checkbox-caption'>Короткометражки</p>
