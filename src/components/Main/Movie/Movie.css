@@ -16,16 +16,14 @@
 }
 
 .movie__title {
-  /* min-height: 36px; */
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
   margin: 0;
-  display: flex;
-  align-items: center;
   font-weight: 500;
   font-size: 15px;
   line-height: 18px;
-  /* white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis; */
 }
 
 .movie__duration {
@@ -51,49 +49,42 @@
   position: relative;
 }
 .movie__favorite-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
   cursor: pointer;
   padding: 0;
-  width: 30px;
-  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   background: url('../../../images/saved-inactive.svg') no-repeat center;
   background-size: 30px 30px;
   border: 1px solid var(--color-border);
-  filter: drop-shadow(0px 0px 10px rgba(181, 181, 181, .6));
+  filter: drop-shadow(0px 0px 10px rgba(181, 181, 181, 0.6));
   border-radius: 50%;
-  opacity: 0;
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .movie__delete-button {
   cursor: pointer;
   padding: 0;
-  width: 30px;
-  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   background: url('../../../images/delete-movie.svg') center center;
   background-size: cover;
   border: 1px solid var(--color-border);
   filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.15));
   border-radius: 50%;
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .movie__favorite-button_active {
   background: url('../../../images/saved-active.svg') center center;
 }
 
-@media (pointer:fine) {
+@media (pointer: fine) {
   .movie__favorite-button:hover {
-    opacity: .8;
+    opacity: 0.8;
     background: url('../../../images/saved-active.svg') center center;
   }
   .movie__delete-button:hover {
-    opacity: .8;
+    opacity: 0.8;
     background: url('../../../images/delete-movie-active.svg') center center;
-  }
-  .movie__image:hover ~ .movie__favorite-button {
-    opacity: 1;
   }
 }
 @media screen and (max-width: 1024px) {

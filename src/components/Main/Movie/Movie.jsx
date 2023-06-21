@@ -13,13 +13,13 @@ const Movie = (props) => {
           <h1 className='movie__title'>{name}</h1>
           <p className='movie__duration'>Длительность: {duration} мин.</p>
         </div>
-      </div>
-      <div className='movie__poster-wrapper'>
-        <img
-          className='movie__image'
-          src={link}
-          alt={name}
+        {location.pathname === '/saved-movies' && (
+          <button
+          type='button'
+          className='movie__delete-button'
+          onClick={() => onDelete(movieData._id)}
         />
+        )}
         {location.pathname === '/movies' && saved && (
           <button
           type='button'
@@ -34,13 +34,13 @@ const Movie = (props) => {
           onClick={() => onSave(movieData)}
         />
         )}
-        {location.pathname === '/saved-movies' && (
-          <button
-          type='button'
-          className='movie__delete-button'
-          onClick={() => onDelete(movieData._id)}
+      </div>
+      <div className='movie__poster-wrapper'>
+        <img
+          className='movie__image'
+          src={link}
+          alt={name}
         />
-        )}
       </div>
     </li>
   );
