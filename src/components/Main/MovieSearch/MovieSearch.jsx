@@ -12,13 +12,15 @@ const MovieSearch = ({ onSubmit, isLoading, onError }) => {
 
   useEffect(() => {
     if (location.pathname === '/movies' && localStorage.getItem(LOCAL_STORAGE_LAST_SEARCH_QUERY)) {
-      const { searchString, isShortMovie } = JSON.parse(localStorage.getItem(LOCAL_STORAGE_LAST_SEARCH_QUERY));
+      const { searchString, isShortMovie } = JSON.parse(
+        localStorage.getItem(LOCAL_STORAGE_LAST_SEARCH_QUERY),
+      );
       setSearchQuery({
-        searchString, isShortMovie
+        searchString,
+        isShortMovie,
       });
-      
     }
-  }, [location])
+  }, [location]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,7 +41,7 @@ const MovieSearch = ({ onSubmit, isLoading, onError }) => {
       return setSearchQuery({ ...searchQuery, searchString: '' });
     }
     setSearchQuery({ ...searchQuery, isShortMovie: e.target.checked });
-    onSubmit({ ...searchQuery, isShortMovie: e.target.checked, });
+    onSubmit({ ...searchQuery, isShortMovie: e.target.checked });
   };
 
   return (
@@ -47,16 +49,19 @@ const MovieSearch = ({ onSubmit, isLoading, onError }) => {
       className='search'
       onSubmit={handleSubmit}
     >
-      <input
-        className='search__input'
-        type='text'
-        placeholder='Фильм'
-        onChange={handleChange}
-        name='searchString'
-        disabled={isLoading}
-        value={searchQuery.searchString}
-      />
       <label className='search__label'>
+        <input
+          className='search__input'
+          type='text'
+          placeholder='Фильм'
+          onChange={handleChange}
+          name='searchString'
+          disabled={isLoading}
+          value={searchQuery.searchString}
+        />
+        <button className='search__button' />
+      </label>
+      <label className='search__label search__label_type_checkbox'>
         <input
           type='checkbox'
           className='search__checkbox-input'
