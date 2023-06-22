@@ -1,5 +1,10 @@
 .movie {
   max-width: 364px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  /* box-sizing: border-box; */
+  /* overflow: hidden; */
 }
 
 .movie__heading-wrapper {
@@ -7,9 +12,14 @@
   justify-content: space-between;
   align-items: center;
   padding: 14px;
+  width: 100%;
 }
 
 .movie__title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: 2;
   margin: 0;
   font-weight: 500;
   font-size: 15px;
@@ -28,56 +38,73 @@
 .movie__image {
   display: block;
   width: 100%;
-  /* height: 203px; */
+  height: 203px;
   object-fit: cover;
+  object-position: center;
+  cursor: pointer;
+  border-radius: 15px;
+  filter: drop-shadow(0 0 5px var(--color-border));
 }
-
+.movie__poster-wrapper {
+  position: relative;
+}
 .movie__favorite-button {
   cursor: pointer;
   padding: 0;
-  width: 30px;
-  height: 30px;
-  background: url('../../../images/saved-inactive.svg') center center;
-  background-size: cover;
+  min-width: 30px;
+  min-height: 30px;
+  background: url('../../../images/saved-inactive.svg') no-repeat center;
+  background-size: 30px 30px;
   border: 1px solid var(--color-border);
-  filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.15));
+  filter: drop-shadow(0px 0px 10px rgba(181, 181, 181, 0.6));
   border-radius: 50%;
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 .movie__delete-button {
   cursor: pointer;
   padding: 0;
-  width: 30px;
-  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
   background: url('../../../images/delete-movie.svg') center center;
   background-size: cover;
   border: 1px solid var(--color-border);
   filter: drop-shadow(0px 0px 15px rgba(0, 0, 0, 0.15));
   border-radius: 50%;
-  transition: all .1s ease-in-out;
+  transition: all 0.1s ease-in-out;
 }
 
 .movie__favorite-button_active {
   background: url('../../../images/saved-active.svg') center center;
 }
 
-@media (pointer:fine) {
+@media (pointer: fine) {
   .movie__favorite-button:hover {
-    opacity: .8;
+    opacity: 0.8;
     background: url('../../../images/saved-active.svg') center center;
   }
   .movie__delete-button:hover {
-    opacity: .8;
+    opacity: 0.8;
     background: url('../../../images/delete-movie-active.svg') center center;
+  }
+}
+@media screen and (max-width: 1024px) {
+  .movie__favorite-button {
+    opacity: 1;
   }
 }
 @media screen and (max-width: 768px) {
   .movie {
     height: 258px;
   }
+  .movie__image {
+    height: 190px;
+  }
 }
 @media screen and (max-width: 620px) {
   .movie {
     height: 236px;
+  }
+  .movie__image {
+    height: 168px;
   }
 }

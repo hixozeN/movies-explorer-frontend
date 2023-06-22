@@ -17,13 +17,13 @@
   text-decoration: none;
   color: var(--color-main);
 }
-.header__link_active {
-  font-weight: 500;
-}
 .header__link_type_default {
   font-weight: 400;
   font-size: 13px;
   line-height: 18px;
+}
+.header__link_active {
+  font-weight: 500;
 }
 .header__link_type_profile {
   padding: 9.5px 36px 9.5px 11px;
@@ -33,7 +33,7 @@
   box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
   border-radius: 40px;
   background: url(../../../images/profile-icon.svg) no-repeat;
-  background-position: 70px;
+  background-position: right 5px top 5px;
 }
 @media (pointer: fine) {
   .header__link:hover {

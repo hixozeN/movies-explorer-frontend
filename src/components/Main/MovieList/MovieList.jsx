@@ -1,87 +1,100 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './MovieList.css';
-import { films } from '../../../data/filmsData';
 import Movie from '../Movie/Movie';
 import { useLocation } from 'react-router-dom';
 import { DeviceContext } from '../../../contexts/DeviceContext/DeviceContext';
 import Preloader from '../../Preloader/Preloader';
+import { BEAT_API_URL } from '../../../utils/globalVars';
+import SearchMessage from '../SearchMessage/SearchMessage';
 
-const MovieList = () => {
+const MovieList = ({ movies, savedMovies, isLoading, text, onSave, onDelete, onTrailerClick }) => {
   const location = useLocation();
   const device = useContext(DeviceContext);
-  const [movies, setMovies] = useState(films);
   const [showMoreFilmsButton, setShowMoreFilmsButton] = useState(true);
-  const [firstRenderCount, setFirstRenderCount] = useState(0);
+  const [renderCount, setRenderCount] = useState(0);
   const [page, setPage] = useState(0);
-  const [isLoading, setLoading] = useState(false);
+  const [isPagginationLoading, setPagginationLoading] = useState(false);
 
   useEffect(() => {
-    const calcFilmsToRender = (device) => {
-      const configForFilmsRender = {
-        desktop: {
-          renderCount: 12,
-          additionalRender: 3,
-        },
-        tablet: {
-          renderCount: 8,
-          additionalRender: 2,
-        },
-        mobile: {
-          renderCount: 5,
-          additionalRender: 1,
-        },
-      };
-
-      return (
-        configForFilmsRender[device].renderCount +
-        configForFilmsRender[device].additionalRender * page
-      );
+    const configForFilmsRender = {
+      desktop: {
+        renderCount: 12,
+        additionalRender: 3,
+      },
+      tablet: {
+        renderCount: 8,
+        additionalRender: 2,
+      },
+      mobile: {
+        renderCount: 5,
+        additionalRender: 2,
+      },
     };
 
-    setFirstRenderCount(calcFilmsToRender(device));
+    setRenderCount(
+      configForFilmsRender[device].renderCount +
+        configForFilmsRender[device].additionalRender * page
+    );
 
-    if (movies.length <= calcFilmsToRender(device)) setShowMoreFilmsButton(false);
-  }, [device, movies, page]);
+    movies.length >= renderCount ? setShowMoreFilmsButton(true) : setShowMoreFilmsButton(false);
+  }, [device, movies, renderCount, page]);
+
+  const isSavedMovie = (movie) => {
+    return savedMovies.reduce((acc, saved) => {
+      if (saved.movieId === movie.id) {
+        movie._id = saved._id;
+        return true;
+      }
+      return acc;
+    }, false);
+  };
+
+  const getImageLink = (movie) => {
+    return movie.movieId
+      ? movie.image
+      : BEAT_API_URL + movie.image.url
+  }
+
+  const getMovieId = (movie) => {
+    return movie.movieId
+      ? movie.movieId
+      : movie.id
+  }
+
+  const renderMovies = (renderCount) => {
+    if (movies.length > 0) {
+      return movies.slice(0, renderCount).map((film) => {
+        return (
+          <Movie
+            key={getMovieId(film)}
+            name={film.nameRU}
+            duration={film.duration}
+            link={getImageLink(film)}
+            saved={isSavedMovie(film)}
+            movieData={film}
+            onSave={onSave}
+            onDelete={onDelete}
+            onTrailerClick={onTrailerClick}
+          />
+        );
+      });
+    }
+  };
 
   const handleClickRenderMore = () => {
     setShowMoreFilmsButton(false);
-    setLoading(true);
+    setPagginationLoading(true);
     setTimeout(() => {
       setShowMoreFilmsButton(true);
-      setLoading(false);
+      setPagginationLoading(false);
       setPage((prev) => prev + 1);
-    }, 500);
+    }, 200);
   };
 
   return (
     <main className='movies'>
-      <ul className='movies__list'>
-        {location.pathname === '/movies'
-          ? movies.slice(0, firstRenderCount).map((film) => {
-              return (
-                <Movie
-                  key={film._id}
-                  name={film.name}
-                  duration={film.duration}
-                  link={film.link}
-                  saved={film.saved}
-                />
-              );
-            })
-          : movies
-              .filter((film) => film.saved)
-              .map((film) => {
-                return (
-                  <Movie
-                    key={film._id}
-                    name={film.name}
-                    duration={film.duration}
-                    link={film.link}
-                    saved={film.saved}
-                  />
-                );
-              })}
-      </ul>
+      {movies.length === 0 && <SearchMessage>{text}</SearchMessage>}
+      <ul className='movies__list'>{isLoading ? <Preloader /> : renderMovies(renderCount)}</ul>
       <div className='movies__paggination-wrapper'>
         {showMoreFilmsButton && (
           <button
@@ -96,7 +109,7 @@ const MovieList = () => {
             Ещё
           </button>
         )}
-        {isLoading && <Preloader />}
+        {isPagginationLoading && <Preloader />}
       </div>
     </main>
   );

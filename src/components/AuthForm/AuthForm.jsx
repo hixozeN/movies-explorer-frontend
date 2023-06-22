@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import './AuthForm.css';
 import { Link } from 'react-router-dom';
 import useFormAndValidation from '../../hooks/FormValidation/useFormValidation';
 import Label from './Label/Label';
+import Preloader from '../Preloader/Preloader';
+import { ApiServiceContext } from '../../contexts/ApiServiceContext/ApiServiceContext';
 
 const AuthForm = ({ isRegForm, onLogin, onRegister }) => {
   const { values, errors, isValid, handleChange, resetForm } = useFormAndValidation();
-  const [serverResError, setServerResError] = useState(false);
+  const { isLoading } = useContext(ApiServiceContext);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
     resetForm();
-    isRegForm ? onRegister() : onLogin();
+    isRegForm
+      ? onRegister({ email: values.email, password: values.password, name: values.name })
+      : onLogin({ email: values.email, password: values.password });
   };
 
   return (
@@ -19,6 +23,7 @@ const AuthForm = ({ isRegForm, onLogin, onRegister }) => {
       name={isRegForm ? 'register' : 'login'}
       className='form'
       onSubmit={handleSubmit}
+      noValidate
     >
       {isRegForm && (
         <Label
@@ -47,15 +52,15 @@ const AuthForm = ({ isRegForm, onLogin, onRegister }) => {
         minLength={6}
       />
       <p className={`form__response-error ${!isRegForm && 'form__response-error_type_login'}`}>
-        {serverResError && 'Пример текста ошибки с сервера.'}
       </p>
+      {isLoading ? <Preloader /> : 
       <button
         type='submit'
         className={`form__submit-button ${!isValid && 'form__submit-button_disabled'}`}
-        // disabled={!isValid}
+        disabled={!isValid}
       >
         {isRegForm ? 'Зарегистрироваться' : 'Войти'}
-      </button>
+      </button>}
       <p className='form__link-caption'>
         {isRegForm ? (
           <>

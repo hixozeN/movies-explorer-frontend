@@ -12,8 +12,8 @@
   font-size: 28px;
   line-height: 34px;
   color: var(--color-main);
-  background: url('../../../images/find.svg') no-repeat right 0px;
-  /* z-index: 3; */
+  cursor: pointer;
+  transition: all 0.2s;
 }
 
 .search__input:focus {
@@ -36,11 +36,11 @@
 /* checkbox */
 .search__label {
   cursor: pointer;
-  padding-top: 31px;
   position: relative;
   display: flex;
   align-items: center;
   gap: 13px;
+  transition: all 0.2s;
 
   --active-bg-color: #2be080;
   --inactive-bg-color: #ebebeb;
@@ -53,7 +53,20 @@
 
   --duration: 0.3s;
 }
-
+.search__label_type_checkbox {
+  margin-top: 31px;
+}
+.search__button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 34px;
+  min-height: 34px;
+  border: none;
+  border-radius: 50%;
+  background: url(../../../images/find.svg) no-repeat;
+  cursor: pointer;
+}
 .search__checkbox-span {
   position: relative;
   width: var(--width);
@@ -95,6 +108,14 @@
   background-color: var(--active-circle-color);
   left: calc(var(--width) - var(--height) + var(--offset));
   transition: var(--duration);
+}
+@media (pointer: fine) {
+  .search__input:hover {
+    opacity: 0.8;
+  }
+  .search__label:hover {
+    opacity: 0.8;
+  }
 }
 @media screen and (max-width: 820px) {
   .search {

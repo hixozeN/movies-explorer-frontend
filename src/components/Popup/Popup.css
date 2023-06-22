@@ -1,0 +1,79 @@
+.popup {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  will-change: transition;
+  transition: 0.1s all linear;
+}
+.popup_opened {
+  visibility: visible;
+  opacity: 1;
+}
+.popup__content {
+  box-sizing: border-box;
+  /* width: 430px; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  background: var(--bg-color-main);
+  border-radius: 10px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  padding: 34px 36px 37px 36px;
+}
+.popup__close-button {
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  filter: drop-shadow(1px 1px 10px #181818);
+  background-image: url(../../images/popup-close-button.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  transition: opacity 0.3s linear;
+}
+.popup__tooltip-wrapper {
+  width: 430px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.popup__iframe {
+  width: 60vw;
+  height: 60vh;
+  border: none;
+}
+@media (pointer: fine) {
+  .popup__close-button:hover {
+    opacity: 0.6;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  .popup__content {
+    padding: 22px 22px;
+  }
+  .popup__tooltip-wrapper {
+    max-width: 282px;
+  }
+  .popup__close-button {
+    right: 0;
+    top: -36px;
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+  }
+}
